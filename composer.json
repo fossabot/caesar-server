@@ -16,7 +16,7 @@
         "friendsofsymfony/user-bundle": "2.1.2",
         "guzzlehttp/guzzle": "6.5.2",
         "hashids/hashids": "3.0.0",
-        "hwi/oauth-bundle": "0.6.3",
+        "hwi/oauth-bundle": "1.1.0",
         "lexik/jwt-authentication-bundle": "2.6.5",
         "nelmio/api-doc-bundle": "3.6.1",
         "nelmio/cors-bundle": "1.5.6",
