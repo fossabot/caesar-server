@@ -11,7 +11,7 @@
         "caesar/security-message-bundle": "*",
         "doctrine/doctrine-fixtures-bundle": "3.3.0",
         "easycorp/easyadmin-bundle": "2.3.5",
-        "fresh/doctrine-enum-bundle": "6.6.2",
+        "fresh/doctrine-enum-bundle": "7.0.1",
         "friendsofsymfony/rest-bundle": "2.7.3",
         "friendsofsymfony/user-bundle": "2.1.2",
         "guzzlehttp/guzzle": "6.5.2",
