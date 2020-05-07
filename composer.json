@@ -10,7 +10,7 @@
         "ext-sockets": "*",
         "caesar/security-message-bundle": "*",
         "doctrine/doctrine-fixtures-bundle": "3.3.0",
-        "easycorp/easyadmin-bundle": "2.3.5",
+        "easycorp/easyadmin-bundle": "2.3.8",
         "fresh/doctrine-enum-bundle": "6.6.2",
         "friendsofsymfony/rest-bundle": "2.7.3",
         "friendsofsymfony/user-bundle": "2.1.2",
