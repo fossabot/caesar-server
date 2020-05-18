@@ -92,9 +92,10 @@ services:
 globals:
 - &confNoSaveBuild
   dockerfile: Dockerfile
-  repo: plugins/docker
-  tag: fourxxi
+  repo: check_build
   dry_run: true
+  purge: false
+  tag: fourxxi
   daemon_off: false
 
 - &confSaveBuild
@@ -109,14 +110,17 @@ globals:
 
 - &stepRunTests
   name: run tests
-  image: release
+  image: check_build:fourxxi
   pull: never
-  settings:
-    <<: *confNoSaveBuild
+  context: /var/www/html
   environment:
     APP_ENV: 'test'
   commands:
+    - cd /var/www/html
     - pwd
+    - ls -la
+    - ls -la bin
+    - ls -la /var/www/html/vendor
     - bin/console doctrine:migrations:migrate --env=test
     - bin/codecept build
     - bin/codecept run api
@@ -124,6 +128,9 @@ globals:
 - &stepCheckBuild
   name: check build
   image: plugins/docker
+  volumes:
+  - name: dockersocket
+    path: /var/run/docker.sock
   settings:
     <<: *confNoSaveBuild
 
@@ -197,10 +204,6 @@ globals:
       {{/success}}
 
 steps:
-- <<: *stepRunTests
-  when:
-    branch: [ feature/* ]
-
 - <<: *stepCheckBuild
   when:
     branch: [ feature/* ]
@@ -208,6 +211,10 @@ steps:
 - <<: *stepMainBuild
   when:
     branch: [ develop, master ]
+
+- <<: *stepRunTests
+  when:
+    branch: [ feature/* ]
 
 - <<: *stepDevelopDeploy
   when:
@@ -221,6 +228,11 @@ steps:
   when:
     status: [ success, failure ]
     branch: [ develop, master ]
+
+volumes:
+- name: dockersocket
+  host:
+    path: /var/run/docker.sock
 
 trigger:
   branch:
