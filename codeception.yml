@@ -9,8 +9,9 @@ actor_suffix: Tester
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
-#params:
-#    - .env
+params:
+    - env
+    - .env
 modules:
     enabled:
         - Symfony:
