@@ -11,7 +11,6 @@ extensions:
         - Codeception\Extension\RunFailed
 params:
     - env
-    - .env
 modules:
     enabled:
         - Symfony:
