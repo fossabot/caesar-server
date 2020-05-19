@@ -3,8 +3,8 @@
 .idea
 .rancher-pipeline.yml
 ./*.md
-!./codeception.yml
 ./*.yml
+!./codeception.yml
 phpunit.xml.dist
 Dockerfile
 docker-compose.yml
