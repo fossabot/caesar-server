@@ -160,7 +160,7 @@ globals:
     - composer install
     - ls -la /var/www/html/vendor
     - bin/console doctrine:migrations:migrate --env=test
-    - bin/codecept build
+    - bin/codecept --no-interaction build 
     - bin/codecept run api
 
 - &stepCheckBuild
