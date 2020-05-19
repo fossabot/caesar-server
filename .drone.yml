@@ -159,7 +159,7 @@ globals:
     - pwd
     - composer install
     - ls -la /var/www/html/vendor
-    - bin/console doctrine:migrations:migrate --env=test
+    - bin/console doctrine:migrations:migrate --env=test --no-interaction
     - bin/codecept build --no-interaction
     - bin/codecept run api
 
