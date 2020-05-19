@@ -112,7 +112,7 @@ name: 4xxi
 
 services:
   - database:
-    name: test database
+    name: database_service
     image: postgres:9
     environment:
       POSTGRES_USER: 'test'
