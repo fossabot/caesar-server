@@ -34,7 +34,8 @@ ENV COMPOSER_MEMORY_LIMIT -1
 RUN composer global require hirak/prestissimo  --prefer-dist --no-progress --no-suggest --optimize-autoloader --no-interaction --no-plugins --no-scripts
 
 # Run in production mode
-ENV APP_ENV=prod
+ARG APP_ENV=prod
+ENV APP_ENV=${APP_ENV}
 # Copy project file
 COPY composer.json .
 COPY composer.lock .
@@ -46,7 +47,8 @@ RUN yarn install && yarn encore production
 FROM base AS dependencies
 # install vendors
 USER www-data
-RUN APP_ENV=prod composer install --prefer-dist --no-plugins --no-scripts --no-dev --optimize-autoloader
+RUN if [ "${APP_ENV}" = "prod" ]; then APP_ENV=${APP_ENV} composer install --prefer-dist --no-plugins --no-scripts --no-dev --optimize-autoloader; \
+ else APP_ENV=${APP_ENV} composer install --prefer-dist --no-plugins --no-scripts;fi
 
 # ---- Release ----
 FROM base AS release
