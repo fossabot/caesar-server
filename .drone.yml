@@ -159,11 +159,8 @@ globals:
     - pwd
     - composer install
     - ls -la /var/www/html/vendor
-<<<<<<< HEAD
-    - echo y>&0 | bin/console doctrine:migrations:migrate --env=test
-=======
-    - bin/console doctrine:migrations:migrate --env=test --no-interaction
->>>>>>> 893d58c047e25c992c2f12b9d88e22b937a6fc04
+    - echo y>&0 | bin/console doctrine:migrations:migrate --env=test --no-interaction
+    - bin/codecept bootstrap
     - bin/codecept build --no-interaction
     - bin/codecept run api
 
