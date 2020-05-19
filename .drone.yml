@@ -161,9 +161,8 @@ globals:
     - ls -la /var/www/html
     - ls -la /var/www/html/vendor
     - echo y>&0 | bin/console doctrine:migrations:migrate --env=test --no-interaction
-    - bin/codecept bootstrap
-    - bin/codecept build --no-interaction
-    - bin/codecept run api
+    - vendor/bin/codecept build --no-interaction
+    - vendor/bin/codecept run api
 
 - &stepCheckBuild
   name: check build
