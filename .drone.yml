@@ -155,6 +155,7 @@ globals:
     TEST_DATABASE_URL:
       from_secret: TEST_DATABASE_URL
   commands:
+    - cd /var/www/html
     - composer install
     - sleep 60
     - echo y>&0 | bin/console doctrine:migrations:migrate --env=test --no-interaction
