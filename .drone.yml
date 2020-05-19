@@ -147,8 +147,7 @@ globals:
     APP_ENV: 'test'
     TEST_POSTGRES_DB:
       from_secret: TEST_POSTGRES_DB
-    TEST_DATABASE_HOST:
-      from_secret: TEST_DATABASE_HOST
+    TEST_DATABASE_HOST: database
     TEST_POSTGRES_USER:
       from_secret: TEST_POSTGRES_USER
     TEST_POSTGRES_PASSWORD:
