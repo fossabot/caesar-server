@@ -158,7 +158,7 @@ globals:
     - cd /var/www/html
     - pwd
     - composer install
-    - ls -la /var/www/html/vendor
+    - ls -la /var/www/html
     - echo y>&0 | bin/console doctrine:migrations:migrate --env=test --no-interaction
     - bin/codecept bootstrap
     - bin/codecept build --no-interaction
