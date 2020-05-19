@@ -162,7 +162,6 @@ globals:
     - vendor/bin/codecept build --no-interaction
     - vendor/bin/codecept run api
   depends_on:
-    - database_service
     - check build
 
 - &stepCheckBuild
