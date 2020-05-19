@@ -118,8 +118,7 @@ globals:
   commands:
     - cd /var/www/html
     - pwd
-    - ls -la
-    - ls -la bin
+    - composer install
     - ls -la /var/www/html/vendor
     - bin/console doctrine:migrations:migrate --env=test
     - bin/codecept build
