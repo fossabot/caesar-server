@@ -155,11 +155,8 @@ globals:
     TEST_DATABASE_URL:
       from_secret: TEST_DATABASE_URL
   commands:
-    - cd /var/www/html
-    - pwd
     - composer install
-    - ls -la /var/www/html
-    - ls -la /var/www/html/vendor
+    - sleep 60
     - echo y>&0 | bin/console doctrine:migrations:migrate --env=test --no-interaction
     - vendor/bin/codecept build --no-interaction
     - vendor/bin/codecept run api
