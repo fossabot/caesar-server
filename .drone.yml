@@ -111,7 +111,7 @@ type: docker
 name: 4xxi
 
 services:
-  - name: database_service
+  - name: databasesrv
     image: postgres:9
     environment:
       POSTGRES_USER: 'test'
