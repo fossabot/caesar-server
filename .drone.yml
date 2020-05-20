@@ -282,10 +282,6 @@ steps:
   when:
     branch: [ develop, master ]
 
-- <<: *stepRunTests
-  when:
-    branch: [ feature/* ]
-
 - <<: *stepDevelopDeploy
   when:
     branch: [ develop ]
