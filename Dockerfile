@@ -42,6 +42,7 @@ COPY composer.lock .
 
 # ---- Test ----
 FROM base AS test
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 ENV APP_ENV=test
 
 ARG POSTGRES_DB
