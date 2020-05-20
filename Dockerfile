@@ -40,6 +40,11 @@ ENV APP_ENV=${APP_ENV}
 COPY composer.json .
 COPY composer.lock .
 
+# ---- Test ----
+FROM base AS test
+ENV APP_ENV=test
+
+# ---- Webpack Encore ----
 FROM node:8-alpine AS yarn-enc
 COPY . .
 RUN yarn install && yarn encore production
