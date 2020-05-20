@@ -184,7 +184,7 @@ globals:
   networks:
   - fourxxi
   extra_hosts:
-  - "4xxi:databasesrv"
+  - "fourxxi:databasesrv"
   volumes:
   - name: dockersocket
     path: /var/run/docker.sock
