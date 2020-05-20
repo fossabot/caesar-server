@@ -42,6 +42,8 @@ COPY composer.lock .
 
 # ---- Test ----
 FROM base AS test
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN APP_ENV=prod composer install --prefer-dist --no-plugins --no-scripts --no-dev --optimize-autoloader
 COPY . .
 ENV APP_ENV=test
 
