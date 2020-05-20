@@ -42,11 +42,10 @@ COPY composer.lock .
 
 # ---- Test ----
 FROM base AS test
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN APP_ENV=prod composer install --prefer-dist --no-plugins --no-scripts --no-dev --optimize-autoloader
 COPY . .
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN APP_ENV=prod composer install --prefer-dist --no-plugins --no-scripts 
 ENV APP_ENV=test
-
 ARG POSTGRES_DB
 ARG DATABASE_HOST
 ARG POSTGRES_USER
