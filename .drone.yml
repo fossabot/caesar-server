@@ -184,7 +184,7 @@ globals:
     path: /var/run/docker.sock
   settings:
     extra_hosts:
-    - "databasesrv://databasesrv@localhost"
+    - "databasesrv://databasesrv"
     build_args_from_env:
     - POSTGRES_DB
     - DATABASE_HOST
