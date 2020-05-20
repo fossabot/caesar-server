@@ -180,7 +180,7 @@ globals:
     DATABASE_URL:
       from_secret: TEST_DATABASE_URL
   extra_hosts:
-  - "myapi.docker:databasesrv"
+  - "databasesrv:databasesrv"
   volumes:
   - name: dockersocket
     path: /var/run/docker.sock
