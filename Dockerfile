@@ -42,22 +42,22 @@ COPY composer.lock .
 
 # ---- Test ----
 FROM base AS test
-COPY . .
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN APP_ENV=test composer install
 ENV APP_ENV=test
 ARG POSTGRES_DB
 ARG DATABASE_HOST
 ARG POSTGRES_USER
 ARG POSTGRES_PASSWORD
 ARG DATABASE_URL
-
 ENV TEST_POSTGRES_DB $POSTGRES_DB
 ENV TEST_DATABASE_HOST $DATABASE_HOST
 ENV TEST_POSTGRES_USER $POSTGRES_USER
 ENV TEST_POSTGRES_PASSWORD $POSTGRES_PASSWORD
 ENV TEST_DATABASE_URL $DATABASE_URL
 RUN echo $TEST_DATABASE_HOST
+
+COPY . .
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN APP_ENV=test composer install 
 RUN bin/console doctrine:migrations:migrate --env=test --no-interaction
 RUN vendor/bin/codecept build --no-interaction
 RUN vendor/bin/codecept run api
