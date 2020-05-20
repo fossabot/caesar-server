@@ -44,7 +44,7 @@ COPY composer.lock .
 FROM base AS test
 COPY . .
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN APP_ENV=prod composer install --prefer-dist --no-plugins --no-scripts 
+RUN APP_ENV=test composer install --prefer-dist --no-plugins --no-scripts 
 ENV APP_ENV=test
 ARG POSTGRES_DB
 ARG DATABASE_HOST
@@ -59,7 +59,6 @@ ENV TEST_POSTGRES_PASSWORD $POSTGRES_PASSWORD
 ENV TEST_DATABASE_URL $DATABASE_URL
 RUN echo $TEST_DATABASE_HOST
 RUN bin/console doctrine:migrations:migrate --env=test --no-interaction
-
 
 #TODO uncomment
 ## ---- Webpack Encore ----

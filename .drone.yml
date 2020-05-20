@@ -146,7 +146,8 @@ globals:
     APP_ENV: 'test'
     TEST_POSTGRES_DB:
       from_secret: TEST_POSTGRES_DB
-    TEST_DATABASE_HOST: database_service
+    TEST_DATABASE_HOST:
+      from_secret: TEST_DATABASE_HOST
     TEST_POSTGRES_USER:
       from_secret: TEST_POSTGRES_USER
     TEST_POSTGRES_PASSWORD:
@@ -170,7 +171,8 @@ globals:
     APP_ENV: 'test'
     POSTGRES_DB:
       from_secret: TEST_POSTGRES_DB
-    DATABASE_HOST: database_service
+    DATABASE_HOST:
+      from_secret: TEST_DATABASE_HOST
     POSTGRES_USER:
       from_secret: TEST_POSTGRES_USER
     POSTGRES_PASSWORD:
@@ -197,7 +199,8 @@ globals:
     APP_ENV: 'test'
     TEST_POSTGRES_DB:
       from_secret: TEST_POSTGRES_DB
-    TEST_DATABASE_HOST: database_service
+    TEST_DATABASE_HOST:
+      from_secret: TEST_DATABASE_HOST
     TEST_POSTGRES_USER:
       from_secret: TEST_POSTGRES_USER
     TEST_POSTGRES_PASSWORD:
