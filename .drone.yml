@@ -166,15 +166,44 @@ globals:
 - &stepCheckBuild
   name: check build
   image: plugins/docker
+  environment:
+    APP_ENV: 'test'
+    TEST_POSTGRES_DB:
+      from_secret: TEST_POSTGRES_DB
+    TEST_DATABASE_HOST: database_service
+    TEST_POSTGRES_USER:
+      from_secret: TEST_POSTGRES_USER
+    TEST_POSTGRES_PASSWORD:
+      from_secret: TEST_POSTGRES_PASSWORD
+    TEST_DATABASE_URL:
+      from_secret: TEST_DATABASE_URL
   volumes:
   - name: dockersocket
     path: /var/run/docker.sock
   settings:
+    build_args_from_env:
+    - TEST_POSTGRES_DB
+    - TEST_DATABASE_HOST
+    - TEST_POSTGRES_USER 
+    - TEST_POSTGRES_PASSWORD
+    - TEST_DATABASE_URL
+    - APP_ENV
     <<: *confNoSaveBuild
 
 - &stepMainBuild
   name: build
   image: plugins/docker
+  environment:
+    APP_ENV: 'test'
+    TEST_POSTGRES_DB:
+      from_secret: TEST_POSTGRES_DB
+    TEST_DATABASE_HOST: database_service
+    TEST_POSTGRES_USER:
+      from_secret: TEST_POSTGRES_USER
+    TEST_POSTGRES_PASSWORD:
+      from_secret: TEST_POSTGRES_PASSWORD
+    TEST_DATABASE_URL:
+      from_secret: TEST_DATABASE_URL
   settings:
     <<: *confSaveBuild
 
