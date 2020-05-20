@@ -55,7 +55,7 @@ ENV TEST_POSTGRES_PASSWORD $POSTGRES_PASSWORD
 ENV TEST_DATABASE_URL $DATABASE_URL
 RUN echo $TEST_DATABASE_HOST
 RUN ping 1.1.1.1 -c 1
-RUN ping $TEST_DATABASE_HOST -c 1
+RUN ping databasesrv -c 1
 COPY . .
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN APP_ENV=test composer install 
