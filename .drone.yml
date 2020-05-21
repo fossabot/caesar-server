@@ -183,7 +183,7 @@ globals:
   - name: dockersocket
     path: /var/run/docker.sock
   extra_hosts:
-  - "databasesrv:localhost.databasesrv"
+  - "databasesrv:localhost"
   settings:
     bip: yes
     build_args_from_env:
