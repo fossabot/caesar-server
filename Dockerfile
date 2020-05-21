@@ -1,6 +1,6 @@
 # ---- Base Image ----
 FROM php:7.4-fpm-alpine AS base
-RUN mkdir -p /var/www/html /var/www/html/public/static /var/www/html/var/cache /var/www/html/var/logs /var/www/html/var/sessions && chown -R www-data /var/www/html 
+RUN mkdir -p /var/www/html /var/www/html/public/static /var/www/html/var/cache /var/www/html/var/logs /var/www/html/var/sessions /var/www/html/var/jwt && chown -R www-data /var/www/html 
 # Set working directory
 WORKDIR /var/www/html
 
@@ -43,25 +43,31 @@ COPY composer.lock .
 # ---- Test ----
 FROM base AS test
 ENV APP_ENV=test
-ARG POSTGRES_DB
-ARG DATABASE_HOST
-ARG POSTGRES_USER
-ARG POSTGRES_PASSWORD
-ARG DATABASE_URL
-ENV TEST_POSTGRES_DB $POSTGRES_DB
-ENV TEST_DATABASE_HOST $DATABASE_HOST
-ENV TEST_POSTGRES_USER $POSTGRES_USER
-ENV TEST_POSTGRES_PASSWORD $POSTGRES_PASSWORD
-ENV TEST_DATABASE_URL $DATABASE_URL
-RUN echo $TEST_DATABASE_HOST
-RUN ping 1.1.1.1 -c 1
-RUN ping databasesrv -c 1
+ENV PGDATA /var/lib/postgresql/data
+ENV POSTGRES_USER=test
+ENV POSTGRES_DB=test
+ENV POSTGRES_PASSWORD=test
+ENV TEST_POSTGRES_USER=test
+ENV TEST_POSTGRES_PASSWORD=test
+ENV TEST_DATABASE_HOST=127.0.0.1
+ENV TEST_POSTGRES_DB=test
+ENV INVITATION_SALT=donotusersimplepasswords
+ENV JWT_PASSPHRASE=caesar
+RUN apk --update add su-exec bash postgresql postgresql-client
+# this 777 will be replaced by 700 at runtime (allows semi-arbitrary "--user" values)
+RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PGDATA" && mkdir /docker-entrypoint-initdb.d
+COPY tests/_scripts/init_db.sh /usr/local/bin
+COPY tests/_scripts/wait-for-it.sh /usr/local/bin
+COPY tests/_scripts/init-user-db.sh /docker-entrypoint-initdb.d
+COPY tests/_keys var/jwt
+# COPY bin bin
+# RUN su www-data -s /bin/sh ./bin/genkeys.sh
 COPY . .
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN APP_ENV=test composer install 
-RUN bin/console doctrine:migrations:migrate --env=test --no-interaction
-RUN vendor/bin/codecept build --no-interaction
-RUN vendor/bin/codecept run api
+RUN composer install 
+RUN bash init_db.sh postgres & wait-for-it.sh 127.0.0.1:5432 -- echo "postgres is up" && \
+bin/console doctrine:migrations:migrate --env=test --no-interaction && \
+vendor/bin/codecept build --no-interaction && \
+vendor/bin/codecept run api
 
 #TODO uncomment
 ## ---- Webpack Encore ----
