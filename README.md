@@ -1,6 +1,8 @@
 Caesar
 ==========
 ## Requirements
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcaesar-team%2Fcaesar-server.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcaesar-team%2Fcaesar-server?ref=badge_shield)
+
 
 * [Docker and Docker Compose](https://docs.docker.com/engine/installation)
 * [MacOS Only]: Docker Sync (run `gem install docker-sync` to install it)
@@ -62,3 +64,7 @@ Available roles:
 - ROLE_SUPER_ADMIN
 
 Ex: `bin/console fos:user:promote username ROLE_ADMIN`
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcaesar-team%2Fcaesar-server.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcaesar-team%2Fcaesar-server?ref=badge_large)
