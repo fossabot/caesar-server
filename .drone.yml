@@ -182,10 +182,12 @@ globals:
   volumes:
   - name: dockersocket
     path: /var/run/docker.sock
+  extra_hosts:
+  - "databasesrv://databasesrv"
   settings:
     bip: yes
     extra_hosts:
-      - "databasesrv:localhost"
+    - "databasesrv://databasesrv"
     build_args_from_env:
     - POSTGRES_DB
     - DATABASE_HOST
